@@ -45,7 +45,7 @@ public class ToDo {
 	@Override
  	public String toString(){
 		return 
-			"Response{" + 
+			"Response {" +
 			"id = '" + id + '\'' + 
 			",completed = '" + completed + '\'' + 
 			",title = '" + title + '\'' + 
