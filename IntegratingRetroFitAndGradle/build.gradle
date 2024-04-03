@@ -19,6 +19,7 @@ dependencies {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     manifest {
         attributes (
                 'Main-Class': 'org.example.Main'
