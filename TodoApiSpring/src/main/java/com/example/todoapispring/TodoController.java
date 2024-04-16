@@ -1,6 +1,7 @@
 package com.example.todoapispring;
 
-import jakarta.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +15,20 @@ public class TodoController {
     private static List<Todo> todoList;
     //custom message if no todo found :
     private static final String to_do_not_found = "Todo not found";
+    private TodoService todoService;
 
-    public TodoController(){
+    public TodoController(@Qualifier("anotherTodoService") TodoService todoService){
         todoList = new ArrayList<>();
         todoList.add(new Todo(1, false, "todo1", 1));
         todoList.add(new Todo(2, true, "todo2", 2));
+        this.todoService = todoService;
     }
 
     // let's create our first API :
 
     @GetMapping("/todos")
     public ResponseEntity<List<Todo>> getTodos(@RequestParam(required = false, defaultValue = "true") boolean isCompleted){
-        System.out.println("------------------------------------"+isCompleted+"-----------------------------");
+        System.out.println("------------------------------------"+isCompleted+"-----------------------------"+this.todoService.doSomething()+"---------------------------------------");
         return ResponseEntity.status(HttpStatus.OK).body(todoList);
     }
 
