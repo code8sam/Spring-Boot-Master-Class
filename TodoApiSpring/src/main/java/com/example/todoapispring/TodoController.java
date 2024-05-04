@@ -16,19 +16,21 @@ public class TodoController {
     //custom message if no todo found :
     private static final String to_do_not_found = "Todo not found";
     private TodoService todoService;
+    private TodoService todoService2;
 
-    public TodoController(@Qualifier("anotherTodoService") TodoService todoService){
+    public TodoController(@Qualifier("anotherTodoService") TodoService todoService, @Qualifier("fakeTodoService") TodoService todoService2){
         todoList = new ArrayList<>();
         todoList.add(new Todo(1, false, "todo1", 1));
         todoList.add(new Todo(2, true, "todo2", 2));
         this.todoService = todoService;
+        this.todoService2 = todoService2;
     }
 
     // let's create our first API :
 
     @GetMapping("/todos")
     public ResponseEntity<List<Todo>> getTodos(@RequestParam(required = false, defaultValue = "true") boolean isCompleted){
-        System.out.println("------------------------------------"+isCompleted+"-----------------------------"+this.todoService.doSomething()+"---------------------------------------");
+        System.out.println("------------------------------------"+isCompleted+"-----------------------------"+this.todoService2.doSomething()+"---------------------------------------");
         return ResponseEntity.status(HttpStatus.OK).body(todoList);
     }
 
