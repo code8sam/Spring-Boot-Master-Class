@@ -1,13 +1,7 @@
 package com.example.UberReviewService.models;
 
-
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.cglib.core.GeneratorStrategy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
@@ -18,6 +12,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Review extends BaseModel{
 
     @Column(nullable=false)
