@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.Date;
 
 @Entity
-@Table(name="bookingreview")
+@Table(name="booking_review")
 @Getter
 @Setter
 @Builder

@@ -9,5 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PassengerReview extends Review{
+    @Column(nullable = false)
     private String passengerReviewContent;
+    @Column(nullable = false)
+    private String passengerRating;
 }
