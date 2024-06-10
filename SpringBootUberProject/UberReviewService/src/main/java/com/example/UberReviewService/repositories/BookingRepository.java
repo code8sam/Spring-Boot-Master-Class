@@ -12,8 +12,8 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-      List<Booking>  findAllByDriverId(Long driverId);
-      List<Booking> findAllByDriverIn(List<Driver> drivers);
+    //    List<Booking>  findAllByDriverId(Long driverId);
+//    List<Booking> findAllByDriverIn(List<Driver> drivers);
     @Query("SELECT r FROM Booking b INNER JOIN Review r ON b.review = r WHERE b.id = :bookingId")
     Review findReviewByBookingId(Long bookingId);
 }
