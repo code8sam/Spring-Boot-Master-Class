@@ -22,6 +22,8 @@ public class Driver extends BaseModel{
     private String name;
     @Column(nullable = false, unique = true)
     private String licenseNumber;
+    private String phoneNumber;
+    private String address;
     @OneToMany(mappedBy = "driver")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Booking> bookings = new ArrayList<>();

@@ -17,7 +17,7 @@ public class Review extends BaseModel{
 
     @Column(nullable=false)
     private String content;
-    Double rating;
+    private Double rating;
 
     public String toString() {
         return "Review{" +

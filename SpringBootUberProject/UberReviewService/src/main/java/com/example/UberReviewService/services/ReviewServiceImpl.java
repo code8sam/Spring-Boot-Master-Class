@@ -5,6 +5,8 @@ import com.example.UberReviewService.repositories.ReviewRepository;
 
 import java.util.List;
 import java.util.Optional;
+import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.FetchNotFoundException;
 
 public class ReviewServiceImpl implements ReviewService{
 
@@ -15,22 +17,52 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public Optional<Review> findReviewById(Long id) {
-        return reviewRepository.findById(id);
+    public Optional<Review> findReviewById(Long id) throws EntityNotFoundException {
+        Optional<Review> review;
+        try {
+            review = this.reviewRepository.findById(id);
+            if (review.isEmpty()) {
+                throw new EntityNotFoundException("Review with id " + id + " not found");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            if(e.getClass() == EntityNotFoundException.class){
+                throw new FetchNotFoundException("Review with id " + id + " not found", id);
+            }
+            throw new FetchNotFoundException("Unable to fetch, PLease try again later!", id);
+        }
+        return review;
     }
 
     @Override
     public List<Review> findAllReviews() {
-        return reviewRepository.findAll();
+        return this.reviewRepository.findAll();
     }
 
     @Override
     public boolean deleteReviewById(Long id) {
         try {
-            reviewRepository.deleteById(id);
+            Review review = this.reviewRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+            this.reviewRepository.delete(review);
             return true;
         }catch (Exception e){
             return false;
         }
+    }
+    @Override
+    public Review publishReview(Review review) {
+        return this.reviewRepository.save(review);
+    }
+
+    @Override
+    public Review updateReview(Long id, Review newReviewData) {
+        Review review = this.reviewRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        if(newReviewData.getRating() != null){
+            review.setRating(newReviewData.getRating());
+        }
+        if(newReviewData.getContent() != null){
+            review.setContent(newReviewData.getContent());
+        }
+        return this.reviewRepository.save(review);
     }
 }
