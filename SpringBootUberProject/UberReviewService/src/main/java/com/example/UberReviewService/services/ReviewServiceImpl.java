@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.FetchNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReviewServiceImpl implements ReviewService{
 
     private ReviewRepository reviewRepository;
@@ -40,7 +42,7 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public boolean deleteReviewById(Long id) {
+    public Boolean deleteReviewById(Long id) {
         try {
             Review review = this.reviewRepository.findById(id).orElseThrow(EntityNotFoundException::new);
             this.reviewRepository.delete(review);
