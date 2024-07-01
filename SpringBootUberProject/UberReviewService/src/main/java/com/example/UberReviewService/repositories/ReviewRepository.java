@@ -11,10 +11,13 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
+    @Query
     Integer countAllByRatingIsLessThanEqual(Integer givenRating);
+    @Query
     List<Review> findAllByRatingIsLessThanEqual(Integer givenRating);
+    @Query
     List<Review> findAllByCreatedAtBefore(Date date);
-    @Query("SELECT r FROM Booking b INNER JOIN Review r ON b.review = r WHERE b.id = :bookingId")
-    Review findReviewByBookingId(Long bookingId);
+//    @Query("SELECT r FROM Booking b INNER JOIN Review r ON b.review = r WHERE b.id = :bookingId")
+//    Review findReviewByBookingId(Long bookingId);
 
 }

@@ -18,6 +18,9 @@ public class Review extends BaseModel{
     @Column(nullable=false)
     private String content;
     private Double rating;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(nullable = false)
+    private Booking booking;
 
     public String toString() {
         return "Review{" +

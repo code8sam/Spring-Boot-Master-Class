@@ -13,8 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Booking extends BaseModel {
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
-    private Review review;
     @Enumerated(value = EnumType.STRING)
     private BookingStatus bookingStatus;
     @Temporal(value = TemporalType.TIMESTAMP)
