@@ -1,11 +1,10 @@
 package com.example.UberReviewService.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
