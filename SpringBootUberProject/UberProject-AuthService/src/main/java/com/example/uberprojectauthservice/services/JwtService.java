@@ -26,8 +26,7 @@ public class JwtService implements CommandLineRunner {
      */
     private String createToken(Map<String, Object> payload, String email){
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + expiry+1000L);
-//        SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+        Date expiryDate = new Date(now.getTime() + expiry*1000L);
         return Jwts.builder()
                 .claims(payload)
                 .issuedAt(new Date(System.currentTimeMillis()))
